@@ -8,8 +8,10 @@ lerna-debug.log*
 
 # Temporary or Old files
 *_old
+*_old.*
 *.old
 *_rem
+*_rem.*
 *.rem
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
