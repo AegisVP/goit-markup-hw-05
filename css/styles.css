@@ -24,6 +24,11 @@ html {
   box-sizing: inherit;
 }
 
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 body {
   color: var(--default-text);
   font-family: 'Roboto', sans-serif;
@@ -112,12 +117,10 @@ body {
 .header-nav-link > a.selected:focus */ {
   color: var(--dark-grey-text);
 
-  transition-property: color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.header-nav-link > a::after {
+.header-nav-link > a.selected::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -127,18 +130,6 @@ body {
 
   background: #2196F3;
   border-radius: 2px;
-
-  opacity: 0;
-
-  transition-property: opacity;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header-nav-link > a:hover::after,
-.header-nav-link > a:focus::after,
-.header-nav-link > a.selected::after {
-  opacity: 1;
 }
 
 .header-nav-link > a:hover,
@@ -167,9 +158,7 @@ body {
   letter-spacing: 0.02em;
   text-decoration: none;
 
-  transition-property: color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-addresses > .link:hover,
@@ -209,9 +198,7 @@ body {
   line-height: 1.71;
   text-decoration: none;
 
-  transition-property: color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer .link:hover,
@@ -264,9 +251,7 @@ body {
   color: var(--contrast-text);
   text-decoration: none;
 
-  transition-property: background-color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .joinus-list > .link-joinus:hover,
@@ -430,9 +415,7 @@ body {
   padding: 27px 0;
   
   background-color: var(--what-we-do-overlay);
-  transition-property: background-color;
-  transition-duration: 1000ms;
-  transition-timing-function: ease-in-out;
+  transition: background-color 1000ms ease-in-out;
   
   font-weight: 700;
   font-size: 14px;
@@ -512,9 +495,7 @@ body {
   width: 44px;
   color: var(--icon-color);
 
-  transition-property: color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .team-member-contacts > .contact:not(:last-child) {
@@ -547,20 +528,15 @@ body {
   padding: 16px 32px;
 
   border: 1px solid var(--icon-color);
+  color: var(--icon-color);
   border-radius: 4px;
   text-align: center;
 
-  transition-property: color, border-color;
+  /* transition-property: color, border-color;
   transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.clients .link {
-  color: var(--icon-color);
-
-  transition-property: color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
+  transition:        color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .clients .link:hover,
@@ -573,7 +549,7 @@ body {
   fill: currentColor;
 }
 
-/* window overlay styles */
+/* modal window overlay styles */
 
 .backdrop {
   position: fixed;
@@ -581,13 +557,14 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+
   background-color: var(--what-we-do-overlay);
+
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.backdrop.is-hidden {
-  display: none;
-  opacity: 0;
-  pointer-events: none;
+.backdrop.is-hidden > .window-order {
+  transform: scale(1.1) translate(-45%, -45%);
 }
 
 .window-order {
@@ -595,9 +572,10 @@ body {
   position: absolute;
   height: 581px;
   width: 528px;
-  top: 221px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  /* transform: translate(-50%, -50%) scale (1); */
+  transform: scale(1) translate(-50%, -50%);
   margin: 0;
   padding: 20px 15px 0;
   
@@ -607,6 +585,7 @@ body {
   border-radius: 4px;
   
   background-color: white;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .window-order > .title {  
@@ -637,9 +616,7 @@ body {
   color: var(--default-text);
   cursor: pointer;
 
-  transition-property: background-color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .icon-container:hover {
@@ -690,9 +667,9 @@ body {
   border: none;
   border-radius: 4px;
 
-  transition-property: background-color, color, box-shadow;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+                         color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
 }
 
 .portfolio-filter-button:hover,
@@ -702,6 +679,10 @@ body {
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 
               0px 1px 2px rgba(0, 0, 0, 0.08), 
               0px 2px 2px rgba(0, 0, 0, 0.12);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 100ms,
+                         color 250ms cubic-bezier(0.4, 0, 0.2, 1) 100ms,
+                    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-list {
@@ -720,9 +701,11 @@ body {
   font-size: 0;
   background-color: var(--contrast-text);
 
-  transition-property: box-shadow;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
+}
+
+.portfolio-list > .item > a {
+  text-decoration: none;
 }
 
 .overlay-text-container {
@@ -753,22 +736,23 @@ body {
   color: var(--contrast-text);
   
   transform: translateY(100%);
-  transition-property: transform;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-list > .item:hover {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 
               0px 4px 4px rgba(0, 0, 0, 0.06), 
               1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-list > .item:hover .overlay-text {
   transform: translateY(0);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
 }
 
-.portfolio-list > .item > .description {
+.portfolio-list > .item .description {
   padding: 20px 24px;
 
   border: 1px solid #eeeeee;
